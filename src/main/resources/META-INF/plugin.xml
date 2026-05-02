@@ -1,0 +1,23 @@
+<idea-plugin>
+    <id>org.danish.auto-test-generator</id>
+    <name>Auto-Test Generator</name>
+    <version>1.0.0</version>
+    <vendor>Danish</vendor>
+    <description>
+        Generates JUnit unit tests for Java code using AI.
+        Right-click any Java file to generate tests instantly.
+    </description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <actions>
+        <action
+                id="org.danish.GenerateTestsAction"
+                class="org.danish.autotestgen.GenerateTestsAction"
+                text="Generate Tests with AI"
+                description="Generate unit tests for selected Java code using AI">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
