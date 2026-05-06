@@ -15,29 +15,21 @@ Right-click any Java file in the editor → click **"Generate Tests with AI"** �
 
 ## How it works
 
-User right-clicks Java file
-↓
-GenerateTestsAction — reads selected code or full file
-↓
-AIService — sends code to LLM via OpenRouter API
-↓
-TestFileWriter — writes generated tests to a new file
+- **GenerateTestsAction** — reads selected code or full file when triggered
+- **AIService** — sends code to LLM via OpenRouter API
+- **TestFileWriter** — writes the generated tests to a new file
 
 ## Project Structure
-src/main/java/org/danish/autotestgen/
-├── GenerateTestsAction.java   # Plugin action, triggered from editor right-click menu
-├── AIService.java             # Handles LLM API call via OpenRouter
-└── TestFileWriter.java        # Creates the test file in the project
+
+- `GenerateTestsAction.java` — Plugin action, triggered from editor right-click menu
+- `AIService.java` — Handles LLM API call via OpenRouter
+- `TestFileWriter.java` — Creates the test file in the project
 
 ## Setup
 
 1. Clone the repo
 2. Set your OpenRouter API key as an environment variable:
-
-```bash
-export OPENROUTER_API_KEY=your_key_here
-```
-
+   `export OPENROUTER_API_KEY=your_key_here`
 3. Open in IntelliJ IDEA
 4. Run the `Run Plugin` configuration
 5. In the sandbox IDE, open any Java file and right-click
