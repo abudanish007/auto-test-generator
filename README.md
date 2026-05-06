@@ -43,4 +43,15 @@ Right-click any Java file in the editor → click **"Generate Tests with AI"** �
 
 ## Why I built this
 
-This plugin was built as part of the JetBrains AI Assistant Chat team internship application. The idea came from my experience at Amazon using IntelliJ daily — writing unit tests is repetitive and time-consuming. This plugin automates that step using AI, keeping the developer in flow.
+This plugin was built as part of the JetBrains AI Assistant Chat team internship application.
+The idea came from my experience at Amazon using IntelliJ daily — writing unit tests is
+repetitive and time-consuming. This plugin automates that step using AI, keeping the
+developer in flow.
+
+It was also inspired by KIRO's "hooks" system — Amazon's AI-native IDE where agents trigger
+automatically on events like file saves to generate tests or documentation in the background.
+This plugin brings a similar concept to IntelliJ: instead of manually prompting an AI chat,
+the developer simply right-clicks and the AI does the work inline, without breaking focus.
+
+This is the direction I believe IntelliJ's AI Assistant should grow towards — less prompting,
+more ambient intelligence embedded in the workflow.plugin was built as part of the JetBrains AI Assistant Chat team internship application. The idea came from my experience at Amazon using IntelliJ daily — writing unit tests is repetitive and time-consuming. This plugin automates that step using AI, keeping the developer in flow.
