@@ -1,38 +1,44 @@
 # Auto-Test Generator — IntelliJ Plugin
 
-An IntelliJ IDEA plugin that automatically generates JUnit 5 unit tests for Java code using AI.
+An IntelliJ IDEA plugin that automatically generates JUnit 5 unit tests for Java code using AI. Built as part of the JetBrains AI Assistant Chat team internship application.
 
 ## What it does
 
 Right-click any Java file in the editor → click **"Generate Tests with AI"** → a test file is instantly created in the same directory with generated unit tests covering happy paths, edge cases, and boundary conditions.
+
+No manual prompting. No copy-pasting. The AI reads your code and writes the tests for you, directly inside your IDE.
 
 ## Demo
 
 1. Open any Java file in IntelliJ
 2. Right-click inside the editor
 3. Select **"Generate Tests with AI"**
-4. A `*Test.java` file is created automatically
+4. A `*Test.java` file is created automatically in the same directory
 
 ## How it works
 
-- **GenerateTestsAction** — reads selected code or full file when triggered
-- **AIService** — sends code to LLM via OpenRouter API
-- **TestFileWriter** — writes the generated tests to a new file
+The plugin is made up of three components that work together:
+
+- **GenerateTestsAction** — listens for the right-click action in the editor. It reads either the selected code or the full file content and kicks off the test generation process on a background thread, so the IDE never freezes.
+- **AIService** — takes the code and sends it to an LLM via the OpenRouter API with a carefully crafted prompt asking for JUnit 5 tests with edge cases and boundary conditions. The response is parsed and returned as a clean Java string.
+- **TestFileWriter** — takes the generated test code and writes it to a new file in the same directory as the source file, named `OriginalClassTest.java`.
 
 ## Project Structure
 
-- `GenerateTestsAction.java` — Plugin action, triggered from editor right-click menu
-- `AIService.java` — Handles LLM API call via OpenRouter
-- `TestFileWriter.java` — Creates the test file in the project
+- `GenerateTestsAction.java` — Plugin action, triggered from the editor right-click menu
+- `AIService.java` — Handles the LLM API call via OpenRouter and parses the response
+- `TestFileWriter.java` — Creates the test file in the same directory as the source file
 
 ## Setup
 
 1. Clone the repo
-2. Set your OpenRouter API key as an environment variable:
+2. Get a free API key from [OpenRouter](https://openrouter.ai)
+3. Set your key as an environment variable:
    `export OPENROUTER_API_KEY=your_key_here`
-3. Open in IntelliJ IDEA
-4. Run the `Run Plugin` configuration
-5. In the sandbox IDE, open any Java file and right-click
+4. Open the project in IntelliJ IDEA
+5. Run the `Run Plugin` configuration
+6. In the sandbox IDE that opens, create or open any Java file
+7. Right-click inside the editor and select **"Generate Tests with AI"**
 
 ## Tech Stack
 
@@ -43,15 +49,10 @@ Right-click any Java file in the editor → click **"Generate Tests with AI"** �
 
 ## Why I built this
 
-This plugin was built as part of the JetBrains AI Assistant Chat team internship application.
-The idea came from my experience at Amazon using IntelliJ daily — writing unit tests is
-repetitive and time-consuming. This plugin automates that step using AI, keeping the
-developer in flow.
+During my time as a Software Development Engineer at Amazon, IntelliJ was my primary IDE. Writing unit tests was always one of the most repetitive parts of the job — especially when onboarding to a new codebase mid-sprint and needing to understand and test unfamiliar code quickly.
 
-It was also inspired by KIRO's "hooks" system — Amazon's AI-native IDE where agents trigger
-automatically on events like file saves to generate tests or documentation in the background.
-This plugin brings a similar concept to IntelliJ: instead of manually prompting an AI chat,
-the developer simply right-clicks and the AI does the work inline, without breaking focus.
+At Amazon I also worked with KIRO — Amazon's AI-native IDE — which had a "hooks" system where AI agents would trigger automatically on events like file saves, generating documentation or tests in the background without any manual prompting. That idea stuck with me.
 
-This is the direction I believe IntelliJ's AI Assistant should grow towards — less prompting,
-more ambient intelligence embedded in the workflow.plugin was built as part of the JetBrains AI Assistant Chat team internship application. The idea came from my experience at Amazon using IntelliJ daily — writing unit tests is repetitive and time-consuming. This plugin automates that step using AI, keeping the developer in flow.
+This plugin is a small step in that direction for IntelliJ. Instead of switching to an AI chat window, copying code, and pasting results back, the developer simply right-clicks and the AI does the work inline. It keeps you in flow.
+
+This is the direction I believe IntelliJ's AI Assistant should grow towards — less prompting, more ambient intelligence embedded directly in the development workflow.
